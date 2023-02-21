@@ -1,0 +1,71 @@
+#customer_orders{
+    display: none;
+    overflow-x: hidden;
+    background-color: transparent;
+    align-items: start;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: Roboto;
+
+}
+
+
+.orders{
+    display: flex;
+    justify-items: start;
+    background-color: #DEEAF4;
+    width: 80%;
+
+    box-shadow: 0 0 50px #ccc;
+    overflow-x: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+
+#order-form .orders::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.orders table{
+
+    width: 90%;
+
+    border-collapse: collapse;
+
+}
+.orders table th{
+    height: 80px;
+    font-size: 1.2em;
+    text-align: start;
+}
+
+.orders table td{
+    height: 20px;
+
+}
+.orders table thead{
+    background-color: #db9187;
+    color: white;
+}
+.orders table,  td {
+    /* border: 2px solid #E4E9F7; */
+    padding: 20px;
+}
+.orders th{
+    padding: 10px;
+}
+.orders tr:nth-child(even){
+    background-color: #F5F7FF;
+}
+
+
+.del, .del a{
+    color: rgb(199, 121, 121);
+    cursor: pointer;
+}
+.del:hover, del a:hover{
+    color: red;
+}

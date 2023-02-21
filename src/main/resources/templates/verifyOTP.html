@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{~/css/form.css}" >
+    <title>Verify OTP</title>
+</head>
+<body  th:style="'background:url('+ @{~/images/abstract.jfif} +');'">
+<form id="form" method="post" th:action="@{/user/verifyOTP}" name="forgotPassword" class="form">
+    <div class="long">
+        <h1>Change Password</h1>
+    </div>
+
+
+    <div  class="input-control long">
+        <label for="otp">Enter OTP code</label><br>
+        <input type="number" id="otp"  name="otp" required>
+        <div class="error"></div>
+    </div><br><br>
+
+    <div  class=" long input-control">
+        <label for="password">Password</label><br>
+        <input type="password" id="password"  name="newPassword" required>
+        <div class="error"></div>
+    </div><br><br>
+
+
+
+
+
+
+
+    <div  class="input-control long">
+        <a th:href="@{/user/resetPassword}"> <input type="submit" value="Verify"></a>
+    </div>
+
+    <div class="link long" >
+        Go back <a style="color: #491358; text-decoration: underline" th:href="@{/login}">Login </a>
+    </div>
+</form>
+</body>
+</html>

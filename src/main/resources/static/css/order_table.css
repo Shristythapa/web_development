@@ -1,0 +1,88 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+}
+#order-form{
+    font-family: Roboto;
+    height:100vh;
+
+    max-width: 100vw;
+    align-items: center;
+    justify-content:center;
+
+
+}
+#order-form .orders{
+    background-color: white;
+    overflow-y: scroll;
+    box-shadow: 0 0 50px #ddd;
+    /* overflow-x: auto; */
+}
+
+#order-form .orders::-webkit-scrollbar {
+    display: none;
+}
+
+tr{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.orders table{
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    border-collapse: collapse;
+
+}
+.orders table, th, td {
+    align-items: start;
+    white-space: normal;
+    word-wrap:break-word;
+    /* border: 2px solid #E4E9F7; */
+    width: 200px;
+
+    height: 100px;
+
+}
+.orders td{
+    color: #6c4477;
+}
+.orders th{
+    color:#491358;
+    background-color: #D5D3F8;
+}
+.orders tr:nth-child(even){
+    background-color: #E5E2F8;
+}
+
+/*.orders tr:hover{*/
+/*    background-color: #c6b7ef;*/
+/*}*/
+
+
+/* drop down styling */
+
+.custom-select {
+
+    font-family: Arial;
+}
+
+
+select {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    appearance: none;
+    width: 100%;
+    text-align: center;
+    color:rgb(74, 74, 74)
+}
+
+select:active{
+    background-color: transparent;
+    border: none;
+}

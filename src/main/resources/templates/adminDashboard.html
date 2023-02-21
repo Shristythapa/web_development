@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+
+    <link rel="stylesheet" th:href="@{~/css/admin_dashboard_sidebar.css}">
+    <link rel="stylesheet" th:href="@{~/css/order_table.css}">
+    <link rel="stylesheet" th:href="@{~/css/boxList.css}">
+    <link rel="stylesheet" th:href="@{~/css/add_product_Form.css}">
+
+
+    <!-- Extra add in Link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="jquery-3.6.1.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="fontawesome-free-5.15.3-web/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- side bar -->
+<!-- side bar -->
+<div class="sidebar">
+    <div class="logo-details">
+        <i class='bx bx-store icon  bx-md'></i>
+        <div class="logo_name">Stuff</div>
+        <i class='bx bx-menu' style="color:#815CAB" id="btn"></i>
+    </div>
+    <ul class="nav-list">
+        <li>
+            <a href="#" id="order-link">
+                <img th:src="@{~/images/dashboard.svg}" class="sidi" alt="order">
+                <!-- <i class='bx bx-hot'></i> -->
+                <!-- <i class="fa fa-shopping-cart" aria-hidden="true" color: rgb(11, 11, 11);></i> -->
+                <span class="links_name">Order</span>
+            </a>
+            <span class="tooltip">Order</span>
+        </li>
+        <li>
+            <a href="#" id="viewproducts-link" class="active" >
+                <img th:src="@{~/images/box.svg}" class="sidi" alt="product"/>
+                <!-- <i class="fa fa-shop" aria-hidden="true"></i> -->
+                <span class="links_name">Products</span>
+            </a>
+            <span class="tooltip">Products</span>
+        </li>
+        <li>
+            <a href="#" id="addProduct-link">
+                <img th:src="@{~/images/basket.svg}" class="sidi" alt="addproduct"/>
+                <!-- <i class="fa fa-product-hunt"></i> -->
+                <span class="links_name">Add Product</span>
+            </a>
+            <span class="tooltip">Add Product</span>
+        </li>
+
+
+        <li class="profile">
+            <div class="profile-details">
+                <div class="name_job">
+                    <div class="name" th:text="${user.username}"></div>
+                </div>
+            </div>
+            <a  th:href="@{/logout}"> <i class='bx bx-log-out' id="log_out"></i></a>
+        </li>
+    </ul>
+</div>
+<!-- home -->
+<section class="home-section">
+
+    <!-- view product -->
+    <div id="viewProduct">
+
+        <div class="row" style="display: flex; align-self: center;
+    flex-wrap: wrap;
+    justify-content: space-around;" >
+            <div class="col-3" style="max-width: 250px;min-width: 200px; max-height: 500px; margin-bottom: 20px"  th:each="product:${productList}">
+                <div  style=" display:flex;align-items: center;max-height:450px; max-width: 175px"><img style="max-height: 100%; max-width: 100%" th:src="'data:image/png;base64,'+${product.imageBase64}"  alt="wtf"></div>
+                <h4 color="#6c4477" th:text="${product.productName}"></h4>
+                <p color="#6c4477" th:text="${product.productPrice}"></p>
+
+                <div class="buttons">
+                    <a  class="btn delete " th:href="@{~/admin/delete/}+${product.id}">delete</a>
+
+                    <a  class="btn delete " th:href="@{~/admin/updateProduct/}+${product.id}">Update</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add product -->
+    <div class="form" id="addProduct" >
+        <form th:method="post" th:action="@{/admin/addProduct}"  th:object="${product}" enctype="multipart/form-data" >
+<!--            <input type="text" hidden th:field="*{id}" >-->
+            <div >
+                <h5>Add Product</h5>
+            </div>
+            <div class="text-input" >
+                <label >Product Name</label><br>
+                <input type="text" th:field="*{productName}" id="name" class="input-box">
+                <p th:if="${requestError!=null}"
+                   th:text="${requestError['productName']}"
+                   class="text-danger"></p>
+            </div>
+
+            <div class="text-input" >
+                <label for="price">Product Price</label><br>
+                <input type="number" th:field="*{productPrice}"  name="price" id="price" class="input-box">
+                <p th:if="${requestError!=null}"
+                   th:text="${requestError['productPrice']}"
+                   class="text-danger"></p>
+            </div>
+            <div class="productImage" >
+                <input type="file"  style="background: white;  color: #6c4477" name="image" accept="image/*"  class="form-control-file">
+            </div>
+            <div >
+                <input type="submit" id="file" value="Add Product">
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Order form -->
+    <!-- Order form -->
+    <div id="order-form">
+        <div class="orders">
+
+            <table class="table table-condensed " style="overflow-x: scroll"  >
+                <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Customer Email</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>new status</th>
+                    <th>update</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ord:${orderList}">
+                    <form th:action="@{/admin/orderUpdate/}+${ord.orderId}"  th:object="${order}" method="post">
+                    <td th:text="${ord.customerName}"></td>
+                    <td th:text="${ord.customerEmail}"></td>
+                    <td th:text="${ord.productName}"></td>
+                    <td th:text="${ord.productPrice}"></td>
+                    <td style="display: flex">
+                            <select class="custom-select" id="status" th:field="*{status}" style="height: 40px; font-size: 15px">
+                                <option th:value="1" th:selected="${ord.status==1}"  th:text="Ordered"></option>
+                                <option th:value="2" th:selected="${ord.status==2}"   th:text="Approved"></option>
+                            </select>
+
+
+
+                    </td>
+                        <td >  <input style="background-color: #D5D3F8 " type="submit" value="update status"/> </td>
+                    </form>
+
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+
+</section>
+<script>
+    let productLink = document.querySelector("#viewproducts-link");
+    let addProductLink = document.querySelector("#addProduct-link")
+    let orderLink = document.querySelector("#order-link");
+    let productForm = document.querySelector("#addProduct");
+    let orderForm = document.querySelector("#order-form");
+    let productList = document.querySelector("#viewProduct");
+    let home = document.querySelector(".home-section");
+    productLink.addEventListener("click", () => {
+        productForm.style.display = "none";
+        productLink.classList.add("active");
+        addProductLink.classList.remove("active");
+        orderLink.classList.remove("active")
+        orderForm.style.display = "none";
+        productList.style.display = "block"
+    });
+
+    orderLink.addEventListener("click", () => {
+        productForm.style.display = "none";
+        productLink.classList.remove("active");
+        addProductLink.classList.remove("active");
+        orderLink.classList.add("active");
+        // home.style.backgroundColor="#ddd";
+        orderForm.style.display = "flex";
+        productList.style.display = "none"
+    });
+
+    addProductLink.addEventListener("click", () => {
+        productLink.classList.remove("active");
+        addProductLink.classList.add("active");
+        orderLink.classList.remove("active")
+        productForm.style.display = "flex";
+        orderForm.style.display = "none";
+        productList.style.display = "none"
+    })
+
+
+
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+
+    closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange();//calling the function(optional)
+    });
+    searchBtn.addEventListener("click", () => { // Sidebar open when you click on the search iocn
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+    });
+
+    $(document).ready(function () {
+        $("div.add").hover(
+            function () {
+                $("form").css({ "display": "true" });
+            }
+        )
+
+    })
+    // following are the code to change sidebar button(optional)
+    function menuBtnChange() {
+        if (sidebar.classList.contains("open")) {
+            closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+        } else {
+            closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");//replacing the iocns class
+        }
+    }
+
+
+
+
+</script>
+</body>
+
+</html>

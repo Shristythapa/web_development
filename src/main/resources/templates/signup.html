@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{~/css/form.css}" rel="stylesheet" />
+    <title>Sign Up</title>
+
+
+</head>
+<body th:style="'background:url('+ @{~/images/abstract.jfif} +');'">
+<form th:method="post"
+      th:action="@{/user/create}" name="signup" class="form"
+      th:object="${users}"  enctype="multipart/form-data">
+
+    <div class="long">
+        <h1>Sign Up</h1>
+    </div>
+
+
+    <div class="long">
+        <label for="username">Username</label><br>
+        <input type="text" id="username" th:field="*{username}" required >
+        <p th:if="${requestError!=null}"
+           th:text="${requestError['username']}"
+           class="errorDiv"></p>
+    </div><br><br>
+
+    <div class="long">
+        <label for=email>Email</label><br>
+        <input type="email" id="email" th:field="*{email}" required >
+        <p th:if="${requestError!=null}"
+           th:text="${requestError['email']}"
+           class="errorDiv"></p>
+    </div>
+
+
+    <div  class="long">
+        <label for="fpass">Password</label><br>
+        <input id="fpass" type="password" th:field="*{password}" required>
+        <p th:if="${requestError!=null}"
+           th:text="${requestError['password']}"
+           class="errorDiv"></p>
+    </div>
+
+    <div  class="long">
+        <label for="spass">Re-type Password</label><br>
+        <input id="spass" type="password" required>
+        <p th:if="${requestError!=null}"
+           th:text="${requestError['password']}"
+           class="errorDiv"></p>
+    </div>
+
+    <div class="long">
+        <input type="submit" value="Sign Up">
+    </div>
+    <div class="link" >
+        Already have an account? <a th:href="@{/login}">Login</a>
+    </div>
+</form>
+</body>
+</html>

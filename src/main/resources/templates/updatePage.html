@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" th:href="@{~/css/update_product_Form.css}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body  id="updatePage">
+<div class="form" id="addProduct" >
+    <form th:method="post" th:action="@{/admin/addProduct}" th:object="${product}" enctype="multipart/form-data" >
+        <input type="text" hidden th:field="*{id}" th:value="${product.id}">
+
+            <h5>Update Product</h5>
+
+        <div class="text-input" >
+            <label >Product Name</label><br>
+            <input type="text" th:field="*{productName}" th:value="${product.productName}" id="name" class="input-box">
+            <p th:if="${requestError!=null}"
+               th:text="${requestError['productName']}"
+               class="text-danger"></p>
+        </div>
+
+        <div class="text-input" >
+            <label for="price">Product Price</label><br>
+            <input type="number" th:field="*{productPrice}" th:value="${product.productPrice}" name="price" id="price" class="input-box">
+            <p th:if="${requestError!=null}"
+               th:text="${requestError['productPrice']}"
+               class="text-danger"></p>
+        </div>
+        <div class="productImage" >
+            <input type="file"  style="background: white;  color: #6c4477" name="image" accept="image/*" th:value="${product.imageBase64}"  class="form-control-file">
+        </div>
+       <div class="buttons">
+           <div class="two">
+               <input class=" file twoIn"  type="submit"  value="Add Product">
+           </div>
+           <div class="two" >
+               <a class=" file twoIn" id="cancels" th:href="@{/admin/Home}">Cancel</a>
+           </div>
+       </div>
+
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto&display=swap');
+
+
+.form{
+    font-family: 'Permanent Marker', cursive;
+    font-family: 'Roboto', sans-serif;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #6c4477;
+}
+
+form{
+    font-size: 1em;
+    position: relative;
+    max-width: 500px;
+    min-height: 85%;
+    width: 100%;
+    background: white;
+    box-shadow: 0 0 50px #ccc;
+    border-radius: 10px;
+    padding:2em ;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#addProduct h5{
+    width: 100%;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #491358;
+}
+#addProduct form div{
+    width: 80%;
+}
+
+
+.text-input label{
+    max-width: 100%;
+    font-size: 1em;
+}
+.input-box{
+    min-width: 70%;
+    height: 30px;
+    max-width: 100%;
+}
+input[type="file"]{
+
+
+}
+input[type=submit],#cancels{
+    font-size: 1em;
+    height:2em;
+    padding: 10px;
+    margin-left: 28%;
+    margin-right: 28%;
+    border:none;
+    cursor:pointer;
+    transition-duration: 0.4s;
+}
+#file:hover{
+    background-color:#6c4477;
+}
+
+#file{
+    background-color:#9f85e0;
+}
+#updatePage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.two{
+    margin: 10px;
+    width: 40%;
+}
+.buttons{
+    display: flex;
+    flex-wrap: wrap;
+    width:100%;
+}
+a{
+    text-decoration: none;
+}

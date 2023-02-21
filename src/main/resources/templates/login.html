@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+  <link th:href="@{~/css/form.css}" rel="stylesheet" />
+  <title>Login</title>
+</head>
+<body  th:style="'background:url('+ @{~/images/abstract.jfif} +');'">
+
+<form id="form" th:action="@{/login}" method="post"  class="form">
+
+  <div class="long">
+    <h1>Login</h1>
+  </div>
+
+
+  <div  class="input-control" style="width: 100%">
+    <label for="email">Email</label><br>
+    <input type="email" id="email"  name="email">
+    <div style="font-size: 150px" th:if="${param.error}" class="errorDiv">
+      <p class="error">Inavalid username or password</p>
+    </div>
+  </div><br><br><br>
+
+
+
+
+  <div class="input-control" style="width: 100%">
+    <label for="fpass">Password</label><br>
+    <input id="fpass" type="password" name="password">
+    <div style="font-size: 150px" th:if="${param.error}" class="errorDiv">
+      <p class="error">Inavalid username or password</p>
+    </div>
+  </div>
+
+
+  <div id="forgotPasswordLink">
+    <a th:href="@{/user/forgotPassword}">Forgot Password?</a>
+  </div>
+
+
+  <div  class="input-control">
+    <input type="submit" value="Login">
+  </div>
+
+  <div class="link" >
+    Dont have an account? <a th:href="@{/user/register}">Sign Up</a>
+  </div>
+  <div th:if="${otpError}" style="width:100%;display: flex;align-items: center; justify-content: center;"  >
+    <span th:text="${otpError}" style="color: red"></span>
+  </div>
+  <div th:if="${otpSuccess}"  style="width:100%;display: flex;align-items: center; justify-content: center; " >
+    <span  th:text="${otpSuccess}" style="color: green"></span>
+  </div>
+</form>
+</body>
+</html>

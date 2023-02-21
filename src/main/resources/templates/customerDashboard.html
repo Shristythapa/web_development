@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!--      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">-->
+<!--      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>-->
+    <script th:src="@{https://kit.fontawesome.com/64ebdf60ff.js}" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{~/css/boxList.css}">
+    <link rel="stylesheet" th:href="@{~/css/search.css}">
+    <link rel="stylesheet" th:href="@{~/css/cus_orders.css}">
+    <title>Home Page</title>
+
+    <style>
+        #customer_products, #customer_orders, .profile,#customer_cart{
+            font-family: 'Permanent Marker', cursive;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+<!--//<div th:if="${successMsg}" th:text="${successMsg}"></div>-->
+<nav>
+    <div></div>
+    <div class="waviy">
+        <span style="--i:1">S</span>
+        <span style="--i:2">t</span>
+        <span style="--i:3">u</span>
+        <span style="--i:4">f</span>
+        <span style="--i:5">f</span>
+
+    </div>
+    <div class="profile">
+        <div class="image"><img th:src="@{~/images/menu.png}" alt="profile"></div>
+        <div class="profileOption">
+
+            <span id="orderLink">Orders</span>
+            <span id="productLink">Products</span>
+            <span id="cartLink">Cart</span>
+            <a th:href="@{/logout}">Logout</a>
+
+        </div>
+    </div>
+</nav>
+
+<div id="customer_products">
+    <!-- search bar -->
+    <div class="search">
+        <form th:action="@{/customer/search}"  method="get" class="example" style="margin:auto;min-width:300px">
+            <input type="text" th:value="${Keyword}" placeholder="Search.." name="keyword">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <!-- search bar -->
+    <!-- <h2 class="title"> Products</h2> -->
+    <div  class="row" style="display: flex; align-self: center;
+    flex-wrap: wrap;
+    justify-content: space-around;" >
+        <div class="col-3" style="max-width: 250px;min-width: 200px; max-height: 500px; margin: 20px" th:each="product:${productList}">
+            <div  style="display:flex;align-items: center;justify-content: center;  max-height:450px; max-width: 175px"><img style="max-height: 100%; max-width: 100%" th:src="'data:image/png;base64,'+${product.imageBase64}"  alt="wtf"></div>
+            <h4 th:text="${product.productName}"></h4>
+            <p th:text="${product.productPrice}"></p>
+
+            <div class="buttons" style="display: flex; flex-wrap: wrap">
+                <a  class="btn buy " th:href="@{~/customer/addToCart/}+${product.id}">Cart</a>
+
+                <a  class="btn buy " th:href="@{~/customer/buy/}+${product.id}">Buy</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+<div id="customer_orders" class="orders">
+
+    <table >
+
+        <thead>
+        <tr>
+
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Order Status</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr class="data" th:each="ord:${orderList}">
+            <th th:text="${ord.productName}"></th>
+            <th th:text="${ord.productPrice}"></th>
+            <th th:style="${ord.status==1 ? 'display:block' : 'display:none'}" >Ordered</th>
+            <th th:style="${ord.status==2 ? 'display:block' : 'display:none'}" >Approved</th>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+
+</div>
+<div id="customer_cart" >
+
+    <div class="row" style="display: flex; align-self: center;
+    flex-wrap: wrap;width: 100%;
+    justify-content: space-around;" >
+        <div class="col-3" style="max-width: 250px;min-width: 200px; max-height: 500px; margin: 20px"  th:each="cart:${cartList}" >
+            <div  style="display:flex;align-items: center;justify-content: center;  max-height:450px; max-width: 175px"><img style="max-height: 100%; max-width: 100%" th:src="'data:image/png;base64,'+${cart.imageBase64}" alt="wtf"></div>
+            <h4 th:text="${cart.productName}"></h4>
+            <p th:text="${cart.productPrice}"></p>
+            <div class="buttons" style="display: flex; flex-wrap: wrap">
+                <a  class="btn buy " th:href="@{~/customer/buyCart/}+${cart.id}">Buy</a>
+                <a  class="btn buy " th:href="@{/customer/deleteCart/}+${cart.id}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<footer>
+    <div class="inner-footer">
+        <div class="social-links">
+            <ul>
+                <li class="social-items">
+                    <a><i class="fa-brands fa-facebook fa-4x"></i></a>
+                </li>
+                <li class="social-items">
+                    <a><i class="fa-brands fa-square-instagram fa-4x"></i></a>
+                </li>
+                <li class="social-items">
+                    <a><i class="fa-brands fa-square-twitter fa-4x"></i></a>
+                </li>
+                <li class="social-items">
+                    <a><i class="fa-brands fa-pinterest fa-4x"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<!-- Footer -->
+
+<script>
+    let cusProduct = document.querySelector("#customer_products")
+    let cusOrders = document.querySelector("#customer_orders")
+    let cusCart = document.querySelector("#customer_cart")
+    let orderLink = document.querySelector("#orderLink")
+    let productLink = document.querySelector("#productLink")
+    let cartLink =document.querySelector("#cartLink")
+
+    productLink.addEventListener("click", () => {
+        cusOrders.style.display = "none";
+        cusProduct.style.display = "block"
+        cusCart.style.display="none";
+    });
+    orderLink.addEventListener("click", () => {
+        cusOrders.style.display = "flex";
+        cusProduct.style.display = "none"
+        cusCart.style.display="none"
+    });
+
+    cartLink.addEventListener("click", () => {
+        cusOrders.style.display = "none";
+        cusProduct.style.display = "none"
+        cusCart.style.display="flex"
+    });
+
+</script>
+</body>
+
+</html>

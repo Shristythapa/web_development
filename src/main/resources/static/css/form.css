@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    font-family: 'Inconsolata', monospace;
+}
+
+
+body{
+
+    background-size: cover;
+}
+label{
+    font-size: 1.2em;
+}
+input{
+    font-size: 0.8em;
+}
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+
+    position: relative;
+    max-width: 400px;
+    min-height: 85%;
+
+
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    /* border:1px solid #333; */
+    border-radius: 50px;
+    opacity: 0.9;
+    padding:2em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.form h1{
+    text-align: center;
+    font-family: 'Syne Mono', monospace;
+}
+
+.long{
+    width:100%;
+}
+.input-control .sucess input{
+    border-color: black;
+
+}
+
+.input-control .error input{
+    border-color: red;
+}
+.input-control .error{
+    color: red;
+    font-size: 0.1em;
+    height: 10px;
+}
+input{
+    border:none;
+    border-bottom: 1px solid #333;
+    padding:0.2em;
+    height: 30px;
+    width: 100%;
+}
+input:focus{
+    outline:none;
+    /* background-color: none; */
+}
+
+
+/* input:-moz-autofill {
+    background: none;
+} */
+input[type=submit]{
+    font-size: 1.2em;
+    max-width:7em;
+    height:2em;
+    /* position:relative;
+    left:37%; */
+    margin-left: 28%;
+    margin-right: 28%;
+    background-color:#FFB8C7;
+    color:white;
+    border:none;
+    cursor:pointer;
+    transition-duration: 0.4s;
+}
+input[type=submit]:hover{
+    background-color: #E688AD;
+}
+
+.link{
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
+.link samp{
+    color: blue;
+}
+.error{
+    color: red;
+}
+#forgotPasswordLink{
+    padding-left: 55%;
+}
